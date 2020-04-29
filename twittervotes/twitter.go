@@ -137,10 +137,10 @@ func readFromTwitter(votes chan<- string) {
 
 func startTwitterStream(stopchan <-chan struct{},
 	votes chan<- string) <-chan struct{} {
-	stoppendchan := make(chan struct{}, 1)
+	stoppedchan := make(chan struct{}, 1)
 	go func() {
 		defer func() {
-			stoppendchan <- struct{}{}
+			stoppedchan <- struct{}{}
 		}()
 		for {
 			select {
@@ -155,5 +155,5 @@ func startTwitterStream(stopchan <-chan struct{},
 			}
 		}
 	}()
-	return stoppendchan
+	return stoppedchan
 }
