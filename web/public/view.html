@@ -20,8 +20,8 @@
         <div class="col-md-4"></div>
     </div>
     <script src="//www.google.com/jsapi"></script>
-    <script src="//ajax.googleapi.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootatrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
         google.load('visualization', '1.0', {'packages': ['corechart']});
         google.setOnLoadCallback(function(){
@@ -29,12 +29,12 @@
                 var chart;
                 var poll = location.href.split("poll=")[1];
                 var update = function(){
-                    $.get("http://location:8080/"+poll+"?key=abc123", null,
+                    $.get("http://localhost:8080/"+poll+"?key=abc123", null,
                     null, "json")
                     .done(function(polls){
                         var poll = polls[0];
                         $('[data-field="title"]').text(poll.title);
-                        $("#option").empty();
+                        $("#options").empty();
                         for (var o in poll.results){
                             $("#options").append(
                                 $("<li>").append(
@@ -47,7 +47,7 @@
                         if (poll.results) {
                             var data = new google.visualization.DataTable();
                             data.addColumn("string","Option");
-                            data.addCOlumn("number", "Votes");
+                            data.addColumn("number", "Votes");
                             for (var o in poll.results) {
                                 data.addRow([o, poll.results[o]])
                             }
@@ -55,7 +55,7 @@
                                 chart = new google.visualization.PieChart
                                 (document.getElementById('chart'));
                             }
-                            chart.draw(data, {is3D: ture});
+                            chart.draw(data, {is3D: true});
                         }
                     });
                     window.setTimeout(update, 1000);

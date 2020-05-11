@@ -25,8 +25,8 @@
         </form>
         <div class="col-md-4"></div>
     </div>
-    <script src="//ajax.googleapi.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootatrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
         $(function(){
             var form = $("form#poll");
@@ -34,7 +34,7 @@
                 e.preventDefault();
                 var title = form.find("input[id='title']").val();
                 var options = form.find("input[id='options']").val();
-                options = options.Split(",");
+                options = options.split(",");
                 for (var opt in options) {
                     options[opt] = options[opt].trim();
                 }
@@ -42,7 +42,7 @@
                 JSON.stringify({
                     title: title, options:options
                 })
-                ).done(function(d, s, r) {
+                ).done(function(d, s, r){
                     location.href = "view.html?poll=" +
                     r.getResponseHeader("Location");
                 });
